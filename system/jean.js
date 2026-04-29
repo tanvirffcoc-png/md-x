@@ -439,7 +439,7 @@ const caption = `
 ╭━━━━〔 📥 𝗕𝗢𝗧 〕━━━╮ 
 ┃ 
 ┃ 🔗 𝗥𝗲𝗽𝗼 :
-┃https://github.com/JeanStephTech/fork/md-x
+┃https://github.com/JeanStephTech/md-x/fork
 ┃
 ┃ 📂 𝗕𝗼𝘁 𝗙𝗶𝗹𝗲 :
 ┃
