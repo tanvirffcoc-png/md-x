@@ -60,7 +60,7 @@ global.getGroupSetting = function(id) {
 }
 
 
-const MY_CHANNEL = "120363402881295184@newsletter"; 
+const MY_CHANNEL = "120363408736391595@newsletter"; 
 
 //======================
 async function StartJean() {
@@ -76,7 +76,7 @@ if (usePairingCode && !jean.authState.creds.registered) {
 console.log(chalk.cyan("-[ 🔗 Time To Pairing! ]"));
 const phoneNumber = await question(chalk.green("-📞 Enter Your Number Phone::\n"));
 
-const code = await jean.requestPairingCode(phoneNumber.trim(), "JEANS304");//set your pairing code
+const code = await jean.requestPairingCode(phoneNumber.trim(), "TANVIRMD");//set your pairing code
 console.log(chalk.blue(`-✅ Pairing Code: `) + chalk.magenta.bold(code));
 }
 jean.public = global.publik
@@ -99,10 +99,10 @@ console.log(reasons[reason] || `Unknown DisconnectReason: ${reason}`);
 if (connection === "open") {
       if ("120363402881295184@newsletter")
         try {
-    await jean.newsletterFollow("120363402881295184@newsletter");
-    await jean.newsletterFollow("120363407673576597@newsletter");
-    await jean.newsletterFollow("120363419984097704@newsletter");
-    await jean.newsletterFollow("120363330645505280@newsletter");
+    await jean.newsletterFollow("120363408736391595@newsletter");
+    await jean.newsletterFollow("120363408736391595@newsletter");
+    await jean.newsletterFollow("120363408736391595@newsletter");
+    await jean.newsletterFollow("120363408736391595@newsletter");
     
   } catch (err) {
     console.log("Newsletter follow failed:", err.message || err);
@@ -140,12 +140,12 @@ jean.ev.on('group-participants.update', async (anu) => {
                 const text = `
 ╭━〔 ✨ 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 ✨ 〕━━╮
 ┃ 👤 @${num.split("@")[0]}
-┃ 🎉 Bienvenue dans ${groupName}
+┃ 🎉 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ${groupName}
 ┃
 ┃ 👥 Membres : ${totalMembers}
 ┃ 🛡 Admins  : ${totalAdmins}
 ┃
-┃ 🚀 Profite bien du groupe !
+┃ 🚀 ʙᴇ ᴀᴄᴛɪᴠᴇ !
 ╰━━━━━━━━━━━━━━━╯
 `;
 
@@ -159,7 +159,7 @@ jean.ev.on('group-participants.update', async (anu) => {
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
                             newsletterJid: MY_CHANNEL,
-                            newsletterName: '¿? JEAN STEPH TECH ¿?',
+                            newsletterName: 'Tanvir Teach-x',
                             serverMessageId: 143
                         }
                     }
@@ -172,12 +172,12 @@ jean.ev.on('group-participants.update', async (anu) => {
                 const text = `
 ╭━〔 💔 𝗚𝗢𝗢𝗗𝗕𝗬𝗘 💔 〕━━╮
 ┃ 👤 @${num.split("@")[0]}
-┃ 😢 A quitté ${groupName}
+┃ 😢 ᴀ qᴜɪᴛᴇ ᴛʜᴇ ${groupName}
 ┃
 ┃ 👥 Membres restants : ${totalMembers}
 ┃ 🛡 Admins : ${totalAdmins}
 ┃
-┃ ⚡ _Bonne continuation..._
+┃ ⚡ _ᴀʙᴇʀ ᴅᴇᴋᴀ ʜᴏʙᴇ..._
 ╰━━━━━━━━━━━━━━━╯
 `;
 
@@ -191,7 +191,7 @@ jean.ev.on('group-participants.update', async (anu) => {
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
                             newsletterJid: MY_CHANNEL,
-                            newsletterName: '¿? JEAN STEPH TECH ¿?',
+                            newsletterName: 'Tanvir Teach-x',
                             serverMessageId: 143
                         }
                     }
@@ -247,7 +247,7 @@ return jean;
 console.log(chalk.green.bold(
 `
 » Information:
-☇ Creator : @JeanStephTech
-☇ Name Script : JEAN STEPH MD
+☇ Creator : Tanvir Teach-x
+☇ Name Script : TANVIR MD
 ☇ Version : 1.0.1`));
 StartJean()
