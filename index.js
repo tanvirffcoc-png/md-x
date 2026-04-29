@@ -5,9 +5,8 @@ const { Boom } = require('@hapi/boom');
 const chalk = require('chalk')
 const crypto = require("crypto");
 const readline = require("readline")
-const axios = require('axios'); // Added for GitHub database
+const axios = require('axios'); 
 const { smsg, fetchJson, await, sleep } = require('./system/lib/myfunction');
-//======================
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) });
 const usePairingCode = true
 
@@ -22,7 +21,7 @@ rl.question(text, resolve)
 
 const fs = require("fs");
 
-// 🔥 créer fichier si inexistant
+//  Create file if doesn't exist
 if (!fs.existsSync('./database.json')) {
     fs.writeFileSync('./database.json', JSON.stringify({
         groups: {},
@@ -30,10 +29,10 @@ if (!fs.existsSync('./database.json')) {
     }, null, 2));
 }
 
-// 🔥 charger DB
+// load DB
 global.db = JSON.parse(fs.readFileSync('./database.json'));
 
-// 🔥 sécuriser structure
+// secure structure
 if (!global.db.groups) global.db.groups = {};
 
 if (!global.db.settings) {
@@ -45,12 +44,12 @@ if (!global.db.settings) {
     };
 }
 
-// 🔥 autosave
+// autosave
 setInterval(() => {
     fs.writeFileSync('./database.json', JSON.stringify(global.db, null, 2));
 }, 5000);
 
-// 🔧 Fonction globale
+// Overall function
 global.getGroupSetting = function(id) {
     if (!global.db.groups[id]) {
         global.db.groups[id] = {
@@ -113,7 +112,7 @@ console.log(chalk.red.bold("-[ WhatsApp Connected ! ]"));
 
 jean.ev.on('group-participants.update', async (anu) => {
     try {
-        // 🔥 GLOBAL OFF → STOP DIRECT
+        
         if (!global.db.settings.welcome) return;
 
         const metadata = await jean.groupMetadata(anu.id);
@@ -121,7 +120,7 @@ jean.ev.on('group-participants.update', async (anu) => {
 
         const group = getGroupSetting(anu.id);
 
-        // 🔥 GROUP OFF → STOP DIRECT
+        
         if (!group.welcome) return;
 
         const totalMembers = metadata.participants.length;
@@ -135,10 +134,7 @@ jean.ev.on('group-participants.update', async (anu) => {
             } catch {
                 ppuser = 'https://files.lordobitotech.xyz/mediafiles/jean.jpg';
             }
-
-            // =========================
-            // ✅ WELCOME
-            // =========================
+            
             if (anu.action === 'add') {
 
                 const text = `
@@ -170,9 +166,7 @@ jean.ev.on('group-participants.update', async (anu) => {
                 });
             }
 
-            // =========================
-            // 💔 GOODBYE
-            // =========================
+ 
             if (anu.action === 'remove') {
 
                 const text = `
@@ -209,7 +203,7 @@ jean.ev.on('group-participants.update', async (anu) => {
         console.log(err);
     }
 });
-//==========================//
+
 jean.ev.on("messages.upsert", async ({
 messages,
 type
@@ -218,7 +212,7 @@ try {
 const msg = messages[0] || messages[messages.length - 1]
 if (type !== "notify") return
 if (!msg?.message) return
-
+const m = smsg(jean, msg, store)
 if (global.db.settings.autotyping) {
     await jean.sendPresenceUpdate("composing", m.chat);
 }
@@ -226,10 +220,9 @@ if (global.db.settings.autotyping) {
 if (global.db.settings.autorecord) {
     await jean.sendPresenceUpdate("recording", m.chat);
 }
-const m = smsg(jean, msg, store)
 require(`./system/jean`)(jean, m, msg, store)
 } catch (err) { console.log((err)); }})
-//=========================//
+
 jean.decodeJid = (jid) => {
 if (!jid) return jid;
 if (/:\d+@/gi.test(jid)) {
@@ -237,7 +230,7 @@ let decode = jidDecode(jid) || {};
 return decode.user && decode.server && decode.user + '@' + decode.server || jid;
 } else return jid;
 };
-//=========================//
+
 jean.sendText = (jid, text, quoted = '', options) => jean.sendMessage(jid, { text: text, ...options }, { quoted });
 jean.ev.on('contacts.update', update => {
 for (let contact of update) {
@@ -250,7 +243,7 @@ store.contacts[id] = { id, name: contact.notify };
 jean.ev.on('creds.update', saveCreds);
 return jean;
 }
-//=============================//
+
 console.log(chalk.green.bold(
 `
 » Information:
@@ -258,4 +251,3 @@ console.log(chalk.green.bold(
 ☇ Name Script : JEAN STEPH MD
 ☇ Version : 1.0.1`));
 StartJean()
-//======================
